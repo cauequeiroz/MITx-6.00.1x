@@ -109,7 +109,7 @@ def hangman(secretWord):
 
         print(status, new_guessed_word)
 
-        if len(secretWord) == len(new_guessed_word):
+        if isWordGuessed(secretWord, letters_guessed):
             won = True
             break
 
