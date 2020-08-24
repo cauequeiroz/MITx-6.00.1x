@@ -18,10 +18,10 @@ This repository store files/exercises of MIT's Introduction to Computer Science 
     - [x] 6. Dictionaries
     - [x] Problem Set 3
 
-- [ ] Week 4: Good Programming Practices
+- [x] Week 4: Good Programming Practices
     - [x] 7. Testing and Debugging
     - [x] 8. Exceptions and Assertions
-    - [ ] Problem Set 4
+    - [x] Problem Set 4
 
 - [ ] Week 5: Object Oriented Programming
     - [x] 9. Classes and Inheritance
