@@ -23,7 +23,7 @@ This repository store files/exercises of MIT's Introduction to Computer Science 
     - [x] 8. Exceptions and Assertions
     - [x] Problem Set 4
 
-- [ ] Week 5: Object Oriented Programming
+- [x] Week 5: Object Oriented Programming
     - [x] 9. Classes and Inheritance
-    - [ ] 10. An Extended Example
-    - [ ] Problem Set 5
+    - [x] 10. An Extended Example
+    - [x] Problem Set 5
