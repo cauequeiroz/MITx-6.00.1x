@@ -29,5 +29,5 @@ This repository store files/exercises of MIT's Introduction to Computer Science 
     - [x] Problem Set 5
 
 - [ ] Week 6: Understanding Program Efficiency
-    - [ ] 11. Computational Complexity
+    - [x] 11. Computational Complexity
     - [ ] 12. Searching and Sorting Algorithms
