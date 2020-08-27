@@ -27,3 +27,7 @@ This repository store files/exercises of MIT's Introduction to Computer Science 
     - [x] 9. Classes and Inheritance
     - [x] 10. An Extended Example
     - [x] Problem Set 5
+
+- [ ] Week 6: Understanding Program Efficiency
+    - [ ] 11. Computational Complexity
+    - [ ] 12. Searching and Sorting Algorithms
