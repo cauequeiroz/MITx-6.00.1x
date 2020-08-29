@@ -30,4 +30,4 @@ This repository store files/exercises of MIT's Introduction to Computer Science 
 
 - [ ] Week 6: Understanding Program Efficiency
     - [x] 11. Computational Complexity
-    - [ ] 12. Searching and Sorting Algorithms
+    - [x] 12. Searching and Sorting Algorithms
