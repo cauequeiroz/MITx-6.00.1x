@@ -229,13 +229,32 @@ def read_trigger_config(filename):
         if not (len(line) == 0 or line.startswith('//')):
             lines.append(line)
 
-    # TODO: Problem 11
-    # line is the list of lines that you need to parse and for which you need
-    # to build triggers
+    triggers = dict()
+    trigger_list = []
 
-    print(lines) # for now, print it so you see what it contains!
+    for line in lines:
+        commands = line.split(',')
 
+        if commands[0] == 'ADD':
+            for trigger in commands[1:]:
+                trigger_list.append(triggers[trigger])
+        else:
+            if commands[1] == 'TITLE':
+                triggers[commands[0]] = TitleTrigger(commands[2])
+            if commands[1] == 'DESCRIPTION':
+                triggers[commands[0]] = DescriptionTrigger(commands[2])
+            if commands[1] == 'AFTER':
+                triggers[commands[0]] = AfterTrigger(commands[2])
+            if commands[1] == 'BEFORE':
+                triggers[commands[0]] = BeforeTrigger(commands[2])
+            if commands[1] == 'NOT':
+                triggers[commands[0]] = NotTrigger(commands[2])
+            if commands[1] == 'AND':
+                triggers[commands[0]] = AndTrigger(commands[2], commands[3])
+            if commands[1] == 'OR':
+                triggers[commands[0]] = OrTrigger(commands[2], commands[3])
 
+    return trigger_list
 
 SLEEPTIME = 120 #seconds -- how often we poll
 
@@ -250,8 +269,7 @@ def main_thread(master):
         triggerlist = [t1, t4]
 
         # Problem 11
-        # TODO: After implementing read_trigger_config, uncomment this line 
-        # triggerlist = read_trigger_config('triggers.txt')
+        triggerlist = read_trigger_config('triggers.txt')
         
         # HELPER CODE - you don't need to understand this!
         # Draws the popup window that displays the filtered stories
@@ -308,4 +326,3 @@ if __name__ == '__main__':
     t = threading.Thread(target=main_thread, args=(root,))
     t.start()
     root.mainloop()
-
