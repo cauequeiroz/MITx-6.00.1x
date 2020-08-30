@@ -53,7 +53,6 @@ def process(url):
 #======================
 
 # Problem 1
-
 class NewsStory(object):
     def __init__(self, guid, title, description, link, pubdate):
         self.guid = guid
@@ -94,7 +93,6 @@ class Trigger(object):
 # PHRASE TRIGGERS
 
 # Problem 2
-
 class PhraseTrigger(Trigger):
     def __init__(self, phrase):
         self.phrase = phrase.lower()
@@ -118,38 +116,44 @@ class PhraseTrigger(Trigger):
         except:
             return False
         
-
-testPhrase = PhraseTrigger('purple cow')
-
-print(testPhrase.is_phrase_in('PURPLE COW'))
-print(testPhrase.is_phrase_in('The purple cow is soft and cuddly.'))
-print(testPhrase.is_phrase_in('The farmer owns a really PURPLE cow.'))
-print(testPhrase.is_phrase_in('Purple!!! Cow!!!'))
-print(testPhrase.is_phrase_in('purple@#$%cow'))
-print(testPhrase.is_phrase_in('Did you see a purple    cow?'))
-print()
-print(testPhrase.is_phrase_in('Purple cows are cool!'))
-print(testPhrase.is_phrase_in('The purple blob over there is a cow.'))
-print(testPhrase.is_phrase_in('How now brown cow.'))
-print(testPhrase.is_phrase_in('Cow!!! Purple!!!'))
-print(testPhrase.is_phrase_in('purplecowpurplecowpurplecow'))
-
 # Problem 3
-# TODO: TitleTrigger
+class TitleTrigger(PhraseTrigger):
+    def __init__(self, phrase):
+        PhraseTrigger.__init__(self, phrase)
+    
+    def evaluate(self, story):
+        return self.is_phrase_in(story.get_title())
 
 # Problem 4
 # TODO: DescriptionTrigger
+class DescriptionTrigger(PhraseTrigger):
+    def __init__(self, phrase):
+        PhraseTrigger.__init__(self, phrase)
+    
+    def evaluate(self, story):
+        return self.is_phrase_in(story.get_description())
 
 # TIME TRIGGERS
 
 # Problem 5
-# TODO: TimeTrigger
-# Constructor:
-#        Input: Time has to be in EST and in the format of "%d %b %Y %H:%M:%S".
-#        Convert time from string to a datetime before saving it as an attribute.
+class TimeTrigger(Trigger):
+    def __init__(self, time):
+        self.time = datetime.strptime(time, "%d %b %Y %H:%M:%S")
 
 # Problem 6
-# TODO: BeforeTrigger and AfterTrigger
+class BeforeTrigger(TimeTrigger):
+    def __init__(self, time):
+        TimeTrigger.__init__(self, time)
+    
+    def evaluate(self, story):
+        return story.get_pubdate().replace(tzinfo=None) < self.time
+
+class AfterTrigger(TimeTrigger):
+    def __init__(self, time):
+        TimeTrigger.__init__(self, time)
+    
+    def evaluate(self, story):
+        return story.get_pubdate().replace(tzinfo=None) > self.time
 
 
 # COMPOSITE TRIGGERS
