@@ -159,13 +159,28 @@ class AfterTrigger(TimeTrigger):
 # COMPOSITE TRIGGERS
 
 # Problem 7
-# TODO: NotTrigger
+class NotTrigger(Trigger):
+    def __init__(self, trigger):
+        self.trigger = trigger
+    
+    def evaluate(self, story):
+        return not self.trigger.evaluate(story)
 
 # Problem 8
-# TODO: AndTrigger
+class AndTrigger(Trigger):
+    def __init__(self, trigger1, trigger2):
+        self.triggers = (trigger1, trigger2)
+    
+    def evaluate(self, story):
+        return self.triggers[0].evaluate(story) and self.triggers[1].evaluate(story)
 
 # Problem 9
-# TODO: OrTrigger
+class OrTrigger(Trigger):
+    def __init__(self, trigger1, trigger2):
+        self.triggers = (trigger1, trigger2)
+    
+    def evaluate(self, story):
+        return self.triggers[0].evaluate(story) or self.triggers[1].evaluate(story)
 
 
 #======================
@@ -182,7 +197,15 @@ def filter_stories(stories, triggerlist):
     # TODO: Problem 10
     # This is a placeholder
     # (we're just returning all the stories, with no filtering)
-    return stories
+    filtered_stories = []
+
+    for story in stories:
+        for trigger in triggerlist:
+            if trigger.evaluate(story):
+                filtered_stories.append(story)
+                break
+
+    return filtered_stories
 
 
 
@@ -283,6 +306,6 @@ if __name__ == '__main__':
     root = Tk()
     root.title("Some RSS parser")
     t = threading.Thread(target=main_thread, args=(root,))
-    # t.start()
-    # root.mainloop()
+    t.start()
+    root.mainloop()
 
